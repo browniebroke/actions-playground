@@ -9,4 +9,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/setup-python@v2.1.3
+    - run: pip install poetry   
     - run: poetry --help
