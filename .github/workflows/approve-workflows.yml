@@ -1,0 +1,25 @@
+name: PR Target
+
+on:
+  pull_request_target:
+    types:
+      - ready_for_review
+      - opened
+      - reopened
+      - synchronize
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "$PR_NUMBER"
+        env:
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+
+      - run: npm install @octokit/action
+      - run: node approve-workflow.js
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
