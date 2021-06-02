@@ -1,25 +1,14 @@
-
 name: Debug
 
 on:
-#  push:
-#  pull_request:
-#  workflow_dispatch:
-  check_suite:
-    types:
-      - requested
+  push:
+  pull_request:
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Debug
+    - run: echo "$PR_NUMBER"
       env:
-        RUN_ID: ${{ github.event.check_suite.id }}
         PR_NUMBER: ${{ github.event.pull_request.number }}
-      run: |
-        echo "$PR_NUMBER"
-        echo "$RUN_ID"
-    - name: Get Month
-      run: date +%m

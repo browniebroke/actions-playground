@@ -1,0 +1,15 @@
+name: Check Suite
+
+on:
+  check_suite:
+    types:
+      - requested
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - run: echo "$RUN_ID"
+      env:
+        RUN_ID: ${{ github.event.check_suite.id }}
+
