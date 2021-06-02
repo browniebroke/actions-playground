@@ -1,4 +1,4 @@
-name: PR Target
+name: Approve
 
 on:
   pull_request_target:
