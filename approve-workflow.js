@@ -23,5 +23,8 @@ const { Octokit } = require("@octokit/action");
       run_id: run.id
     });
   })
-  await Promise.all(approval_promises);
+  await Promise.all(approval_promises).catch(error=>{
+    console.error(error)
+    process.exit(1);
+  });
 }());
