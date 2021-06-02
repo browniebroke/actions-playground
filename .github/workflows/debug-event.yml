@@ -2,9 +2,9 @@
 name: Debug
 
 on:
-  push:
-  pull_request:
-  workflow_dispatch:
+#  push:
+#  pull_request:
+#  workflow_dispatch:
   check_suite:
     types:
       - requested
