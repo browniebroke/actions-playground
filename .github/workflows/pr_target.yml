@@ -15,3 +15,14 @@ jobs:
       - run: echo "$PR_NUMBER"
         env:
           PR_NUMBER: ${{ github.event.pull_request.number }}
+
+      - uses: octokit/request-action@v2.x
+        id: list_runs
+        with:
+          route: GET /repos/{repository}/actions/runs
+          repository: ${{ github.repository }}
+          event: pull_request
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - run: echo ${{ steps.list_runs.outputs.data }}
