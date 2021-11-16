@@ -1,0 +1,12 @@
+name: Debug
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - run: echo "branch = '$GITHUB_REF_NAME'"
