@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    if: github.repository_owner == 'cookiecutter'
+    if: github.repository_owner == 'browniebroke'
     runs-on: ubuntu-latest
 
     steps:
