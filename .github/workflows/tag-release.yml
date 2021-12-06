@@ -11,9 +11,11 @@ jobs:
       - uses: actions/checkout@v2
       - name: Make minor and major tags
         run: |
-          FULL_TAG=$(echo "${GITHUB_REF}" | cut -d'/' -f3)
-          MINOR=$(echo "${FULL_TAG}"  | cut -d'.' -f1-2)
-          MAJOR=$(echo "${FULL_TAG}"  | cut -d'.' -f1)
+          FULL_TAG=$(echo "${GITHUB_REF}" | sed s@refs/tags/@@g)
+          echo "Full tag: ${FULL_TAG}"
+          MINOR=$(echo "${FULL_TAG}" | cut -d'.' -f1-2)
+          MAJOR=$(echo "${FULL_TAG}" | cut -d'.' -f1)
+          echo "Got minor and major tags: ${MINOR}, ${MAJOR}"
           git tag "${MINOR}"
           git tag "${MAJOR}"
       - name: Push tags
