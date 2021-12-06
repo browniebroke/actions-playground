@@ -1,4 +1,4 @@
-name: Tag releases with minor and major version
+name: Update Tags
 
 on:
   release:
@@ -6,16 +6,18 @@ on:
 
 jobs:
   tag:
-    name: Update tags
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Tag
+      - name: Make major tag
         run: |
           MAJOR=$(echo ${GITHUB_REF}  | cut -d'.' -f1)
-          MINOR=$(echo ${GITHUB_REF}  | cut -d'.' -f1-2)
           git tag ${MAJOR}
+      - name: Make minor tag
+        run: |
+          MINOR=$(echo ${GITHUB_REF}  | cut -d'.' -f1-2)
           git tag ${MINOR}
-          git push origin HEAD:refs/heads/main --tags --force
+      - name: Push tags
+        run: git push origin HEAD:refs/heads/main --tags --force
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
