@@ -12,3 +12,4 @@ jobs:
 
     steps:
     - run: echo "branch = '$GITHUB_REF_NAME'"
+    - run: env
