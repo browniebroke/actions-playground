@@ -1,0 +1,28 @@
+name: Sync Github labels
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/**"
+
+jobs:
+  labels:
+    runs-on: ubuntu-latest
+
+    permissions:
+      # Permissions required to sync labels
+      issues: write
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.x
+      - name: Sync config with Github
+        uses: browniebroke/labels@github-action
+        with:
+          username: ${{ github.repository_owner }}
+          token: ${{ secrets.GITHUB_TOKEN }}
